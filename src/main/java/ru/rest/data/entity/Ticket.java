@@ -1,4 +1,5 @@
 package ru.rest.data.entity;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,9 +17,18 @@ public class Ticket {
     private String title;
     @Column(name = "image")
     private String image;
-    //private List<String> answers;
+    @Column(name = "answer_1")
+    private String answerOne;
+    @Column(name = "answer_2")
+    private String answerTwo;
+    @Column(name = "answer_3")
+    private String answerThree;
+    @Column(name = "answer_4")
+    private String answerFour;
     @Column(name = "correct")
     private Integer correctAnswer;
     @Column(name = "actual")
     private Integer actualAnswer;
+    @Column(name = "type")
+    private String type;
 }

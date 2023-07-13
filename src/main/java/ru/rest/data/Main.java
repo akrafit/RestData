@@ -19,16 +19,19 @@ public class Main {
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(8085);
         File baseDir = Files.createTempDirectory("embedded-tomcat").toFile();
-        Context context= tomcat.addWebapp("",baseDir.getAbsolutePath());
+        Context context = tomcat.addWebapp("",baseDir.getAbsolutePath());
         // Create a Spring application context
         AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
         appContext.register(SpringConfig.class);
         appContext.register(HibernateConfig.class);
+        appContext.setConfigLocation("ru.rest.data.config");
         // Create a DispatcherServlet and register it with Tomcat
         DispatcherServlet dispatcherServlet = new DispatcherServlet(appContext);
         Tomcat.addServlet(context, "spring-mvc-dispatcher", dispatcherServlet).setLoadOnStartup(1);
-        context.addServletMappingDecoded("/*", "spring-mvc-dispatcher");
+        //context.addServletMappingDecoded("/*", "spring-mvc-dispatcher");
+        context.addServletMapping("/*", "spring-mvc-dispatcher");
         tomcat.start();
         tomcat.getServer().await();
+
     }
 }
