@@ -32,6 +32,5 @@ public class Main {
         context.addServletMapping("/*", "spring-mvc-dispatcher");
         tomcat.start();
         tomcat.getServer().await();
-
     }
 }
