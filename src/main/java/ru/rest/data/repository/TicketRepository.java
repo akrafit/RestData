@@ -31,4 +31,27 @@ public class TicketRepository {
         List<Ticket> list = query.list();
         return list;
     }
+
+    public List<Ticket> findTicketsByTypeAndLimit(String typeQuestion) {
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Ticket where type = :type");
+        query.setParameter("type", typeQuestion);
+        List<Ticket> list = query.list();
+        return list;
+    }
+
+    public List<Long> findAllId() {
+        Session session = sessionFactory.openSession();
+        Query query = session.createNativeQuery("from ticket");
+        return query.list();
+    }
+
+    public Ticket findById(Long idLong) {
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Ticket where id = :id");
+        query.setParameter("id", idLong);
+        //query.setMaxResults(limit);
+        List<Ticket> list = query.list();
+        return list.get(0);
+    }
 }
